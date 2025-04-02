@@ -45,7 +45,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <h1>Welcome to Your Sleep Dashboard</h1>
+      <h1>🌙 Your Sleep Time 😴</h1>
       <p>Track your sleep patterns and improve your sleep quality.</p>
       <h3>Quick Stats</h3>
       <p>Total Sleep Today: {totalSleepToday}</p>

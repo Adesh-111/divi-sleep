@@ -159,6 +159,7 @@ input.confirmPass.invalid {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-family: Lilita One;
   transition: background 0.3s ease;
 }
 
@@ -209,8 +210,9 @@ input.confirmPass.invalid {
   }
 
   .auth-box {
-    width: 100%;
+    width: 90%;
     height: auto;
+    transform: scale(0.9);
     padding: 15px;
   }
 
@@ -271,7 +273,11 @@ input.confirmPass.invalid {
   .main-auth-box {
     width: 1150px;
     padding: 5px;
-    transform: scale(0.7);
+    gap: 0px;
+  }
+
+  .auth-box{
+    transform: scale(0.8);
   }
 
   .auth-box h2 {
@@ -285,7 +291,7 @@ input.confirmPass.invalid {
   .signup-form .sign-up-button,
   .login-form .login-button {
     width: 100%;
-    font-size: 12px;
+    font-size: 18px;
   }
 
   .social-buttons a img {
