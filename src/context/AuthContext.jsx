@@ -1,17 +1,19 @@
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const storedToken = localStorage.getItem("token");
     const tokenExpiration = localStorage.getItem("tokenExpiration");
-    if (token && tokenExpiration) {
+    if (storedToken && tokenExpiration) {
       const expirationDate = new Date(tokenExpiration);
       if (expirationDate > new Date()) {
-        setUser(token);
+        setUser({ token: storedToken });
+        setToken(storedToken);
       } else {
         localStorage.removeItem("token");
         localStorage.removeItem("tokenExpiration");
@@ -25,16 +27,18 @@ export const AuthProvider = ({ children }) => {
     expirationDate.setDate(expirationDate.getDate() + 14); // Set expiration time to 2 weeks
     localStorage.setItem("tokenExpiration", expirationDate.toISOString());
     setUser(token);
+    setToken(token);
   };
 
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("tokenExpiration");
     setUser(null);
+    setToken(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

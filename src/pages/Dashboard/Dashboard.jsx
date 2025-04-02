@@ -6,25 +6,29 @@ import "./Dashboard.css";
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const [totalSleepToday, setTotalSleepToday] = useState("--");
+  const [totalSleepWeekly, setTotalSleepWeekly] = useState("--");
+  const [totalSleepMonthly, setTotalSleepMonthly] = useState("--");
 
   useEffect(() => {
-    const fetchSleepData = async () => {
+    const fetchSleepData = async (url, setData) => {
       try {
-        const response = await axios.get("http://localhost:5000/api/sleep/today", {
+        const response = await axios.get(url, {
           headers: { 
-            Authorization: user, 
+            Authorization: user.token, 
             "Content-Type": "application/json"
           },
         });
         const duration = formatDuration(response.data.total_sleep);
-        setTotalSleepToday(duration);
+        setData(duration);
       } catch (error) {
-        console.error("Error fetching sleep data:", error);
+        console.error(`Error fetching sleep data from ${url}:`, error);
       }
     };
 
     if (user) {
-      fetchSleepData();
+      fetchSleepData("http://localhost:5000/api/sleep/today", setTotalSleepToday);
+      fetchSleepData("http://localhost:5000/api/sleep/weekly", setTotalSleepWeekly);
+      fetchSleepData("http://localhost:5000/api/sleep/monthly", setTotalSleepMonthly);
     }
   }, [user]);
 
@@ -45,6 +49,8 @@ const Dashboard = () => {
       <p>Track your sleep patterns and improve your sleep quality.</p>
       <h3>Quick Stats</h3>
       <p>Total Sleep Today: {totalSleepToday}</p>
+      <p>Total Sleep This Week: {totalSleepWeekly}</p>
+      <p>Total Sleep This Month: {totalSleepMonthly}</p>
     </div>
   );
 };

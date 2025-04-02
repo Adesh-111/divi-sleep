@@ -17,7 +17,7 @@ const SleepTracker = () => {
     try {
       const response = await axios.post("http://localhost:5000/api/sleep/start", {}, {
         headers: { 
-          "Authorization": user,
+          "Authorization": user.token,
         },
       });
       const startTime = new Date(response.data.record.start_time);
@@ -35,7 +35,7 @@ const SleepTracker = () => {
       try {
         const response = await axios.post("http://localhost:5000/api/sleep/end", {}, {
           headers: { 
-           "Authorization": user
+           "Authorization": user.token
           },
         });
         const endTime = new Date(response.data.record.end_time);

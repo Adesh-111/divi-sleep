@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 import { register, login } from "../../services/api";
 import "./LoginPage.css";
 
 const LoginPage = () => {
+  const { login: authLogin } = useContext(AuthContext);
+
   const [signupData, setSignupData] = useState({
     username: "",
     password: "",
@@ -92,11 +95,7 @@ const LoginPage = () => {
     try {
       const response = await login(loginData.username, loginData.password);
       alert("Login Successful");
-      const token = response.token;
-      const expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 14); // Set expiration time to 2 weeks
-      localStorage.setItem('token', token);
-      localStorage.setItem('tokenExpiration', expirationDate.toISOString());
+      authLogin(response.token);
       navigate("/");
     } catch (error) {
       alert("Error during login.");

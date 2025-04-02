@@ -108,4 +108,20 @@ router.get("/sleep/monthly", authenticateUser, async (req, res) => {
   }
 });
 
+router.get("/sleep/history", authenticateUser, async (req, res) => {
+  const userId = req.user.userId;
+  try {
+    const result = await pool.query(
+      `SELECT id, start_time, end_time, EXTRACT(EPOCH FROM (end_time - start_time)) AS duration
+       FROM sleep_records 
+       WHERE user_id = $1 
+       ORDER BY start_time DESC`,
+      [userId]
+    );
+    res.json({ records: result.rows });
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching sleep history" });
+  }
+});
+
 export default router;
