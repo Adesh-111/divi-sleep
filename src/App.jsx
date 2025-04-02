@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import SleepTracker from "./pages/SleepTracker/SleepTracker";
 import SleepHistory from "./pages/SleepHistory/SleepHistory";
 import Welcome from "./pages/Welcome/Welcome";
+import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/tracker" element={<SleepTracker />} />
           <Route path="/history" element={<SleepHistory />} />
+          <Analytics />
         </Routes>
       </Router>
     </AuthProvider>
