@@ -13,6 +13,14 @@ const SleepTracker = () => {
   const timerRef = useRef(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const startTime = localStorage.getItem("sleepStart");
+    if (startTime) {
+      setSleepStart(new Date(startTime));
+      startTimer(new Date(startTime));
+    }
+  }, []);
+
   const startSleep = async () => {
     try {
       const response = await axios.post("http://localhost:5000/api/sleep/start", {}, {
@@ -24,6 +32,7 @@ const SleepTracker = () => {
       setSleepStart(startTime);
       setSleepEnd(null);
       setDuration(null);
+      localStorage.setItem("sleepStart", startTime.toISOString());
       startTimer(startTime);
     } catch (error) {
       setError("Error starting sleep session.");
@@ -42,6 +51,7 @@ const SleepTracker = () => {
         setSleepEnd(endTime);
         setDuration(formatDuration(endTime - sleepStart));
         clearInterval(timerRef.current);
+        localStorage.removeItem("sleepStart");
         navigate("/dashboard"); 
       } catch (error) {
         setError("Error ending sleep session.");
@@ -70,8 +80,10 @@ const SleepTracker = () => {
   }, []);
 
   return (
-    <div className="sleep-tracker-container">
-      <h2>Sleep Tracker</h2>
+    <div className="sleep-tracker">
+      <h1>DIVI Sleep?</h1>
+      <h2>Did we sleep?</h2>
+      <h3>Sleep Tracker</h3>
       <button onClick={startSleep} disabled={sleepStart && !sleepEnd}>Start Sleep</button>
       <button onClick={endSleep} disabled={!sleepStart || sleepEnd}>End Sleep</button>
       {error && <p className="error-text">{error}</p>}
