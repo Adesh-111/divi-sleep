@@ -1,0 +1,117 @@
+@import url(https://fonts.googleapis.com/css?family=Lilita+One:regular);
+@import url(https://fonts.googleapis.com/css?family=Caveat:regular,500,600,700);
+
+*{
+    margin: 0;
+    padding: 0 ;
+}
+
+.welcome h1, h2{
+    font-family: Lilita One;
+    color: #F1EFEC;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.welcome h1{
+    font-size: 100px;
+}
+
+.welcome h2{
+    font-size: 30px;
+    color: #123458;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #F1EFEC;
+
+}
+
+@keyframes floatImage {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+.welcome img {
+    width: 450px;
+    border-radius: 60px 160px 160px 60px;
+    animation: floatImage 3s infinite ease-in-out;
+}
+
+.welcome-content{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.welcome-content p{
+    width: 600px;
+    font-family: caveat;
+    font-weight: bold;
+    font-size: 40px;
+    color: #F1EFEC;
+}
+
+.welcome-content button{
+    background-color: #123458;
+    color: #F1EFEC;
+    padding: 10px 15px;
+    border: none;
+    margin-top: 30px;
+    font-size: 18px;
+    border: 3px solid #F1EFEC;
+    border-radius: 10px;
+    font-family: Lilita One;
+    transition: 0.5s ease;
+}
+
+.welcome-content button:hover{
+    transform: scale(1.1);
+}
+
+@media screen and (max-width : 1024px) {
+    .welcome-content img{
+        width: 400px;
+    }
+}
+
+@media screen and (max-width : 800px) {
+    .welcome-content img{
+        width: 400px;
+    }
+
+    .welcome-content{
+        transform: scale(0.6);
+    }
+}
+
+@media screen and (max-width : 600px) {
+    .welcome-content img{
+        width: 400px;
+    }
+
+    .welcome{
+        height: 100vh;
+    }
+    
+    .welcome h1{
+        font-size: 75px;
+    }
+
+    .welcome h2{
+        font-size: 25px;
+    }
+
+    .welcome-content{
+        flex-direction: column;
+        margin-top: -130px;
+        margin-bottom: 0;
+        gap: 50px;
+    }
+
+    .welcome-content button{
+        font-size: 30px;
+    }
+}

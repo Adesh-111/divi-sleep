@@ -135,7 +135,7 @@ const LoginPage = () => {
               </ul>
             )}
 
-            <label style={{ color: "grey" }}>Confirm Password:</label>
+            <label style={{ color: "#F1EFEC" }}>Confirm Password:</label>
             <input
               type="password"
               name="confirmPassword"
@@ -178,9 +178,9 @@ const LoginPage = () => {
               onChange={handleLoginChange}
               required
             />
-            <a href="#" className="forgot-password">
+            {/* <a href="#" className="forgot-password">
               Forgot Password?
-            </a>
+            </a> */}
 
             <button type="submit" className="login-button">
               Log In

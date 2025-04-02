@@ -4,10 +4,12 @@ body {
   margin: 0;
   padding: 0;
   background: linear-gradient(112.64deg, #93CB44 0.37%, #1B82B3 100%);
-  background-repeat: no-repeat;
-  background-size: cover;
+  overflow-x: hidden;
   width: 100vw;
   height: 100vh;
+  background: url("../../assets/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   }
 
 .auth-container {
@@ -15,7 +17,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url("../../assets/background.png");
+  ;
   width: 100%;
   font-family: "Lato", sans-serif;
 }
@@ -27,11 +29,14 @@ body {
   gap: 30px;
   padding: 0 20px;
   margin: 10px;
-  background-color: white;
-  width: 1020px;
+  max-width: 1020px;
   height: 650px;
   border-radius: 15px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.2); 
+  backdrop-filter: blur(15px); 
+  -webkit-backdrop-filter: blur(15px); 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+  border: 1px solid rgba(255, 255, 255, 0.3); 
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -51,13 +56,14 @@ body {
   font-weight: 400;
   line-height: 48px;
   text-align: center;
+  color: #F1EFEC;
 }
 
 .vertical-line {
   width: 1px;
   height: 480px;
   background: #ccc;
-  color: white;
+  color: transparent;
 }
 
 .auth-container form {
@@ -79,7 +85,7 @@ body {
   padding: 8px;
   border-radius: 10px;
   font-size: 15px;
-  color: grey;
+  color: #123458;
   border: 1px solid grey;
   box-shadow: none;
   transition: all 0.3s ease;
@@ -101,7 +107,7 @@ body {
 }
 
 .auth-box label{
-  color: grey;
+  color: #F1EFEC;
 }
 
 input.email.invalid,
@@ -110,7 +116,7 @@ input.confirmPass.invalid {
   border: 1px solid rgb(238, 116, 116);
 }
 .pass-rules{
-  color: gray;
+  color: #F1EFEC;
   font-size: 12px;
   margin-top: 0;
 }
@@ -138,7 +144,7 @@ input.confirmPass.invalid {
   align-items: center;
   gap: 2px;
   margin-bottom: 10px;
-  color: gray;
+  color: #F1EFEC;
 }
 
 .signup-form .terms a {
@@ -147,7 +153,7 @@ input.confirmPass.invalid {
 }
 
 .auth-container button {
-  background: #007bff;
+  background: #123458;
   color: #fff;
   padding: 10px;
   border: none;
@@ -261,10 +267,11 @@ input.confirmPass.invalid {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .main-auth-box {
-    width: 100%;
+    width: 1150px;
     padding: 5px;
+    transform: scale(0.7);
   }
 
   .auth-box h2 {
