@@ -11,13 +11,12 @@ const Dashboard = () => {
     const fetchSleepData = async () => {
       try {
         const response = await axios.get("http://localhost:5000/api/sleep/today", {
-          headers: { Authorization: user ,
-            "Content-Type": "application/json",
+          headers: { 
+            Authorization: user, 
+            "Content-Type": "application/json"
           },
         });
-        const duration = formatDuration(response.data.duration);
-        console.log(duration);
-        
+        const duration = formatDuration(response.data.total_sleep);
         setTotalSleepToday(duration);
       } catch (error) {
         console.error("Error fetching sleep data:", error);
@@ -30,7 +29,7 @@ const Dashboard = () => {
   }, [user]);
 
   const formatDuration = (milliseconds) => {
-    if (milliseconds === null || milliseconds === undefined || isNaN(milliseconds)) {
+    if (!milliseconds || isNaN(milliseconds)) {
       return "--";
     }
     const totalSeconds = Math.floor(milliseconds / 1000);

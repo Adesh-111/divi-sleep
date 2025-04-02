@@ -36,7 +36,7 @@ router.post("/login", async (req, res) => {
 
     if (!passwordMatch) return res.status(401).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: "365d" });
     res.json({ token });
   } catch (error) {
     res.status(500).json({ error: "Error logging in" });
@@ -78,11 +78,31 @@ router.get("/sleep/today", authenticateUser, async (req, res) => {
   const userId = req.user.userId;
   try {
     const result = await pool.query(
-      "SELECT COALESCE(SUM(duration), 0) AS total_sleep FROM sleep_records WHERE user_id = $1 AND start_time >= CURRENT_DATE",
+      `SELECT COALESCE(SUM(EXTRACT(EPOCH FROM (end_time - start_time))), 0) AS total_sleep 
+       FROM sleep_records 
+       WHERE user_id = $1 
+       AND start_time >= CURRENT_DATE`,
       [userId]
     );
-    const totalSleep = result.rows.length ? result.rows[0].total_sleep || 0 : 0;
-    res.json({ total_sleep: totalSleep });
+    const totalSleepMilliseconds = result.rows.length ? result.rows[0].total_sleep * 1000 : 0;
+    res.json({ total_sleep: totalSleepMilliseconds });
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching sleep data" });
+  }
+});
+
+router.get("/sleep/monthly", authenticateUser, async (req, res) => {
+  const userId = req.user.userId;
+  try {
+    const result = await pool.query(
+      `SELECT COALESCE(SUM(EXTRACT(EPOCH FROM (end_time - start_time))), 0) AS total_sleep 
+       FROM sleep_records 
+       WHERE user_id = $1 
+       AND start_time >= CURRENT_DATE - INTERVAL '1 month'`,
+      [userId]
+    );
+    const totalSleepMilliseconds = result.rows.length ? result.rows[0].total_sleep * 1000 : 0;
+    res.json({ total_sleep: totalSleepMilliseconds });
   } catch (error) {
     res.status(500).json({ error: "Error fetching sleep data" });
   }
