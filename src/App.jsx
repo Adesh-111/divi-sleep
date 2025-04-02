@@ -20,7 +20,8 @@ const App = () => {
         </Routes>
       </Router>
     </AuthProvider>
-    <Analytics /></>
+    <Analytics />
+    </>
     
   );
 };
