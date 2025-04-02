@@ -64,12 +64,12 @@ const Dashboard = () => {
           tracking!
         </p>
         <img src={assets.Dashboard.curlyArrow} alt="" />
-        <a href="">
-          <button>Track now</button>
+        <a href="/tracker">
+          <button>Track your sleep</button>
         </a>
       </div>
       <h4>🌙 Your Sleep Time 😴</h4>
-      <h3>How many hours you slept</h3>
+      <h6>How many hours you slept</h6>
       <div className="dashboard-cards">
         <div className="dashboard-card">
           <p>Today</p>

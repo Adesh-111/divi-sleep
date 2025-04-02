@@ -26,3 +26,114 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.dashboard-container .track-now{
+    display: flex;
+    justify-content: center ;
+    gap: 50px;
+    align-items: center;
+}
+
+.dashboard-container .track-now p{
+    border: 5px dashed #F1EFEC;
+    padding: 30px 20px;
+    border-radius: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-family: caveat;
+    font-weight: 800;
+}
+
+.dashboard-container .track-now button{
+    background-color: transparent;
+    border: 3px solid #F1EFEC;
+    padding: 15px 20px;
+    border-radius: 20px 5px 20px 5px;
+    color: #F1EFEC;
+    font-family: Lilita One;
+    font-size: 26px;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.dashboard-container .track-now button:hover{
+    background-color: #F1EFEC;
+    color: #123458;
+    transform: scale(1.1);
+}
+
+.dashboard-container h6{
+    font-family: caveat;
+    font-size: 60px;
+}
+
+.dashboard-container .dashboard-cards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.dashboard-card p{
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.dashboard-card h3{
+    font-size: 50px;
+}
+
+@media screen and (max-width : 800px) {
+    .dashboard-container{
+        transform: scale(0.6);
+    }
+}
+
+@media screen and (max-width : 600px) {
+    .dashboard-container{
+        transform: scale(1);
+    }
+
+    .dashboard-container .track-now{
+        gap: 20px;
+        margin: 10px 20px;
+    }
+
+    .dashboard-container .track-now p{
+        font-size: 18px;
+    }
+
+    .dashboard-container h1{
+        font-size: 85px;
+    }
+
+    .dashboard-container h2{
+        font-size: 25px;
+    }
+
+    .dashboard-container h4{
+        font-size: 40px;
+    }
+
+    .dashboard-container h6{
+        font-size: 28px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .dashboard-cards{
+        margin-top: -10px;
+        margin-bottom: 30px;
+    }
+
+    .dashboard-cards p{
+        font-size: 20px;
+        
+    }
+
+    .dashboard-cards h3{
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+}

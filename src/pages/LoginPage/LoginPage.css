@@ -3,14 +3,12 @@
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(112.64deg, #93CB44 0.37%, #1B82B3 100%);
-  overflow-x: hidden;
   width: 100vw;
   height: 100vh;
-  background: url("../../assets/background.jpg");
-  background-repeat: no-repeat;
+  overflow-x: hidden;
+  background: url("../../assets/background.jpg") no-repeat center center fixed;
   background-size: cover;
-  }
+}
 
 .auth-container {
   display: flex;
