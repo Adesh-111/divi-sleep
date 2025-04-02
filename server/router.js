@@ -7,7 +7,7 @@ import authenticateUser from "./authMiddleware.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    res.send("<h1>Welcome to the divi sleep backend </h1>");
+    res.send("<h1>Welcome to the divi backend </h1>");
 });
 
 router.post("/register", async (req, res) => {

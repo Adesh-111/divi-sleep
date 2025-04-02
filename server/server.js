@@ -1,19 +1,23 @@
-import express from "express";
-import cors from "cors";
-import router from "./router.js"; 
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import sleepRoutes from './router.js';
+
+dotenv.config();
 
 const app = express();
 
-app.use(cors({
-  origin: "*",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true
-}));
+const allowedOrigins = ['http://localhost:5173', 'https://divi-sleep.vercel.app/'];
+const corsOptions = {
+  origin: allowedOrigins,
+  optionsSuccessStatus: 200, 
+};
 
-app.use(express.json());
-app.use("/api", router); 
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
+
+app.use('/api', sleepRoutes);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
