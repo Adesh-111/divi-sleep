@@ -9,8 +9,7 @@ import Welcome from "./pages/Welcome/Welcome";
 import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
-  return (
-    <AuthProvider>
+  return (<><AuthProvider>
       <Router>
         <Routes>
         <Route path="/" element={<Welcome />} />
@@ -18,10 +17,11 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/tracker" element={<SleepTracker />} />
           <Route path="/history" element={<SleepHistory />} />
-          <Analytics />
         </Routes>
       </Router>
     </AuthProvider>
+    <Analytics /></>
+    
   );
 };
 
