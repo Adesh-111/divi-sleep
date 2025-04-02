@@ -28,15 +28,15 @@ const Dashboard = () => {
 
     if (user) {
       fetchSleepData(
-        "http://localhost:5000/api/sleep/today",
+        "https://divi-sleep-api.vercel.app/api/sleep/today",
         setTotalSleepToday
       );
       fetchSleepData(
-        "http://localhost:5000/api/sleep/weekly",
+        "https://divi-sleep-api.vercel.app/api/sleep/weekly",
         setTotalSleepWeekly
       );
       fetchSleepData(
-        "http://localhost:5000/api/sleep/monthly",
+        "https://divi-sleep-api.vercel.app/api/sleep/monthly",
         setTotalSleepMonthly
       );
     }

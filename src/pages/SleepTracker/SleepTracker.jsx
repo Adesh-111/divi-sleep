@@ -23,11 +23,15 @@ const SleepTracker = () => {
 
   const startSleep = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/sleep/start", {}, {
-        headers: { 
-          "Authorization": user.token,
-        },
-      });
+      const response = await axios.post(
+        "https://divi-sleep-api.vercel.app/api/sleep/start",
+        {},
+        {
+          headers: {
+            Authorization: user.token,
+          },
+        }
+      );
       const startTime = new Date(response.data.record.start_time);
       setSleepStart(startTime);
       setSleepEnd(null);
@@ -42,17 +46,21 @@ const SleepTracker = () => {
   const endSleep = async () => {
     if (sleepStart) {
       try {
-        const response = await axios.post("http://localhost:5000/api/sleep/end", {}, {
-          headers: { 
-           "Authorization": user.token
-          },
-        });
+        const response = await axios.post(
+          "https://divi-sleep-api.vercel.app/api/sleep/end",
+          {},
+          {
+            headers: {
+              Authorization: user.token,
+            },
+          }
+        );
         const endTime = new Date(response.data.record.end_time);
         setSleepEnd(endTime);
         setDuration(formatDuration(endTime - sleepStart));
         clearInterval(timerRef.current);
         localStorage.removeItem("sleepStart");
-        navigate("/dashboard"); 
+        navigate("/dashboard");
       } catch (error) {
         setError("Error ending sleep session.");
       }
@@ -84,8 +92,12 @@ const SleepTracker = () => {
       <h1>DIVI Sleep?</h1>
       <h2>Did we sleep?</h2>
       <h3>Sleep Tracker</h3>
-      <button onClick={startSleep} disabled={sleepStart && !sleepEnd}>Start Sleep</button>
-      <button onClick={endSleep} disabled={!sleepStart || sleepEnd}>End Sleep</button>
+      <button onClick={startSleep} disabled={sleepStart && !sleepEnd}>
+        Start Sleep
+      </button>
+      <button onClick={endSleep} disabled={!sleepStart || sleepEnd}>
+        End Sleep
+      </button>
       {error && <p className="error-text">{error}</p>}
       {duration && <p>Total Sleep: {duration}</p>}
     </div>

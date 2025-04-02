@@ -15,9 +15,12 @@ const SleepHistory = () => {
       }
 
       try {
-        const response = await axios.get("http://localhost:5000/api/sleep/history", {
-          headers: { Authorization:user.token},
-        });
+        const response = await axios.get(
+          "https://divi-sleep-api.vercel.app/api/sleep/history",
+          {
+            headers: { Authorization: user.token },
+          }
+        );
         setSleepRecords(response.data.records);
       } catch (error) {
         console.error("Error fetching sleep history:", error);
@@ -44,8 +47,16 @@ const SleepHistory = () => {
             <tr key={record.id}>
               <td>{new Date(record.start_time).toLocaleDateString()}</td>
               <td>{new Date(record.start_time).toLocaleTimeString()}</td>
-              <td>{record.end_time ? new Date(record.end_time).toLocaleTimeString() : "Ongoing"}</td>
-              <td>{record.duration ? (record.duration / 3600).toFixed(2) : "Ongoing"}</td>
+              <td>
+                {record.end_time
+                  ? new Date(record.end_time).toLocaleTimeString()
+                  : "Ongoing"}
+              </td>
+              <td>
+                {record.duration
+                  ? (record.duration / 3600).toFixed(2)
+                  : "Ongoing"}
+              </td>
             </tr>
           ))}
         </tbody>

@@ -7,7 +7,7 @@ import authenticateUser from "./authMiddleware.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    res.send("<h1>Welcome</h1>");
+    res.send("<h1>Welcome to the devi backend </h1>");
 });
 
 router.post("/register", async (req, res) => {

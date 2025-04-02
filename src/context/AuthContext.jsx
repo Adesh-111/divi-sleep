@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   const login = (token) => {
     localStorage.setItem("token", token);
     const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 14); // Set expiration time to 2 weeks
+    expirationDate.setDate(expirationDate.getDate() + 14); 
     localStorage.setItem("tokenExpiration", expirationDate.toISOString());
     setUser(token);
     setToken(token);
