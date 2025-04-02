@@ -7,7 +7,13 @@ import sleepRoutes from "./router.js";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+const corsOptions = {
+  origin: 'https://divi-sleep-api.vercel.app',
+  optionsSuccessStatus: 200 
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.use("/api", sleepRoutes);
