@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { register, login } from "../../services/api";
 import "./LoginPage.css";
 
@@ -16,9 +17,11 @@ const LoginPage = () => {
 
   const [usernameStatus, setUsernameStatus] = useState(""); 
   const [passwordStatus, setPasswordStatus] = useState(""); 
-  const [confirmPasswordStatus, setConfirmPasswordStatus] = useState(""); // Updated state
+  const [confirmPasswordStatus, setConfirmPasswordStatus] = useState(""); 
   const [error, setError] = useState("");
   const [passwordErrors, setPasswordErrors] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleSignupChange = (e) => {
     const { name, value } = e.target;
@@ -89,9 +92,12 @@ const LoginPage = () => {
     try {
       const response = await login(loginData.username, loginData.password);
       alert("Login Successful");
-      // Save the token and redirect to the dashboard
-      localStorage.setItem('token', response.token);
-      // Redirect to dashboard or another page
+      const token = response.token;
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 14); // Set expiration time to 2 weeks
+      localStorage.setItem('token', token);
+      localStorage.setItem('tokenExpiration', expirationDate.toISOString());
+      navigate("/");
     } catch (error) {
       alert("Error during login.");
     }
@@ -140,11 +146,6 @@ const LoginPage = () => {
               required
             />
             {error && <p className="error-text">{error}</p>}
-
-            {/* <label className="terms">
-              <input type="checkbox" required className="check" />I hereby agree
-              to all the Terms and Conditions mentioned <a href="#">here</a>
-            </label> */}
 
             <button type="submit" className="sign-up-button">
               Sign Up

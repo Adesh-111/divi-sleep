@@ -81,7 +81,8 @@ router.get("/sleep/today", authenticateUser, async (req, res) => {
       "SELECT COALESCE(SUM(duration), 0) AS total_sleep FROM sleep_records WHERE user_id = $1 AND start_time >= CURRENT_DATE",
       [userId]
     );
-    res.json({ total_sleep: result.rows[0].total_sleep });
+    const totalSleep = result.rows.length ? result.rows[0].total_sleep || 0 : 0;
+    res.json({ total_sleep: totalSleep });
   } catch (error) {
     res.status(500).json({ error: "Error fetching sleep data" });
   }

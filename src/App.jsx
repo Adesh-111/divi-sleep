@@ -1,12 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
-import LoginPage from "../pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-import Dashboard from "./pages/Dashboard";
-import SleepHistory from "./pages/SleepHistory";
-import SleepTracker from "./pages/SleepTracker";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import SleepHistory from "./pages/SleepHistory/SleepHistory";
+import SleepTracker from "./pages/SleepTracker/SleepTracker";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
-import "./index.css";
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useContext(AuthContext);
@@ -19,7 +17,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
           <Route
             path="/dashboard"
             element={
@@ -37,7 +34,7 @@ function App() {
             }
           />
           <Route
-            path="/tracker"
+            path="/"
             element={
               <ProtectedRoute>
                 <SleepTracker />

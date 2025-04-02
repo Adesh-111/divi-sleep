@@ -7,16 +7,29 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) setUser(token);
+    const tokenExpiration = localStorage.getItem("tokenExpiration");
+    if (token && tokenExpiration) {
+      const expirationDate = new Date(tokenExpiration);
+      if (expirationDate > new Date()) {
+        setUser(token);
+      } else {
+        localStorage.removeItem("token");
+        localStorage.removeItem("tokenExpiration");
+      }
+    }
   }, []);
 
   const login = (token) => {
     localStorage.setItem("token", token);
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 14); // Set expiration time to 2 weeks
+    localStorage.setItem("tokenExpiration", expirationDate.toISOString());
     setUser(token);
   };
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("tokenExpiration");
     setUser(null);
   };
 

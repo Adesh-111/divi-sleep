@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import "./SleepHistory.css";
 
@@ -11,7 +11,7 @@ const SleepHistory = () => {
     const fetchSleepHistory = async () => {
       try {
         const response = await axios.get("/api/sleep/history", {
-          headers: { Authorization: `Bearer ${user}` },
+          headers: { Authorization:user},
         });
         setSleepRecords(response.data.records);
       } catch (error) {
