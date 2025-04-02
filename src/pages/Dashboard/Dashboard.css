@@ -1,0 +1,28 @@
+.dashboard-container{
+    font-family: Lilita One;
+    color: #F1EFEC;
+    text-align: center; 
+}
+
+.dashboard-container h1{
+    font-size: 100px;
+    margin-top: 20px;
+}
+
+.dashboard-container h2{
+    font-size: 30px;
+    background-color: #F1EFEC;
+    font-size: 30px;
+    color: #123458;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #F1EFEC;
+}
+
+.dashboard-container h4{
+    font-size: 50px;
+    background-color: #123458;
+    color: #F1EFEC;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

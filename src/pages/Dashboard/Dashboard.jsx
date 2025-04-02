@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import "./Dashboard.css";
+import assets from "../../assets/assets";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -13,9 +14,9 @@ const Dashboard = () => {
     const fetchSleepData = async (url, setData) => {
       try {
         const response = await axios.get(url, {
-          headers: { 
-            Authorization: user.token, 
-            "Content-Type": "application/json"
+          headers: {
+            Authorization: user.token,
+            "Content-Type": "application/json",
           },
         });
         const duration = formatDuration(response.data.total_sleep);
@@ -26,9 +27,18 @@ const Dashboard = () => {
     };
 
     if (user) {
-      fetchSleepData("http://localhost:5000/api/sleep/today", setTotalSleepToday);
-      fetchSleepData("http://localhost:5000/api/sleep/weekly", setTotalSleepWeekly);
-      fetchSleepData("http://localhost:5000/api/sleep/monthly", setTotalSleepMonthly);
+      fetchSleepData(
+        "http://localhost:5000/api/sleep/today",
+        setTotalSleepToday
+      );
+      fetchSleepData(
+        "http://localhost:5000/api/sleep/weekly",
+        setTotalSleepWeekly
+      );
+      fetchSleepData(
+        "http://localhost:5000/api/sleep/monthly",
+        setTotalSleepMonthly
+      );
     }
   }, [user]);
 
@@ -45,12 +55,35 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <h1>🌙 Your Sleep Time 😴</h1>
-      <p>Track your sleep patterns and improve your sleep quality.</p>
-      <h3>Quick Stats</h3>
-      <p>Total Sleep Today: {totalSleepToday}</p>
-      <p>Total Sleep This Week: {totalSleepWeekly}</p>
-      <p>Total Sleep This Month: {totalSleepMonthly}</p>
+      <h1>DIVI Sleep?</h1>
+      <h2>Did we sleep?</h2>
+      <div className="track-now">
+        {" "}
+        <p>
+          Prioritize your rest and improve your well-being with better sleep
+          tracking!
+        </p>
+        <img src={assets.Dashboard.curlyArrow} alt="" />
+        <a href="">
+          <button>Track now</button>
+        </a>
+      </div>
+      <h4>🌙 Your Sleep Time 😴</h4>
+      <h3>How many hours you slept</h3>
+      <div className="dashboard-cards">
+        <div className="dashboard-card">
+          <p>Today</p>
+          <h3>{totalSleepToday}</h3>
+        </div>
+        <div className="dashboard-card">
+          <p>Week</p>
+          <h3>{totalSleepMonthly}</h3>
+        </div>
+        <div className="dashboard-card">
+          <p>Month</p>
+          <h3>{totalSleepMonthly}</h3>
+        </div>
+      </div>
     </div>
   );
 };
