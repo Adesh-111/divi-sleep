@@ -11,11 +11,13 @@ const app = express();
 const allowedOrigins = ['http://localhost:5173', 'https://divi-sleep.vercel.app/'];
 const corsOptions = {
   origin: allowedOrigins,
-  optionsSuccessStatus: 200, 
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'] // Ensure POST is included
 };
-
+app.use(cors(corsOptions));
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', sleepRoutes);
 
