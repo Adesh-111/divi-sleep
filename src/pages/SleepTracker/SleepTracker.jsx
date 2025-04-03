@@ -4,8 +4,9 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import "./SleepTracker.css";
 
+
 const SleepTracker = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setButtonText } = useContext(AuthContext);
   const [sleepStart, setSleepStart] = useState(null);
   const [sleepEnd, setSleepEnd] = useState(null);
   const [duration, setDuration] = useState(null);
@@ -18,8 +19,15 @@ const SleepTracker = () => {
     if (startTime) {
       setSleepStart(new Date(startTime));
       startTimer(new Date(startTime));
+      setButtonText("Tracking...");
     }
-  }, []);
+  }, [setButtonText]);
+
+  useEffect(() => {
+    if (sleepStart && !sleepEnd) {
+      navigate("/tracker");
+    }
+  }, [sleepStart, sleepEnd, navigate]);
 
   const startSleep = async () => {
     try {
@@ -27,7 +35,7 @@ const SleepTracker = () => {
         setError("User token missing. Please log in again.");
         return;
       }
-
+  
       const response = await axios.post(
         "https://divi-sleep-api.vercel.app/api/sleep/start",
         {},
@@ -38,13 +46,16 @@ const SleepTracker = () => {
           },
         }
       );
-
+  
       const startTime = new Date(response.data.record.start_time);
       setSleepStart(startTime);
       setSleepEnd(null);
       setDuration(null);
       localStorage.setItem("sleepStart", startTime.toISOString());
       startTimer(startTime);
+  
+      // Navigate to the /tracker route
+      navigate('/tracker');
     } catch (error) {
       console.error(
         "Error starting sleep session:",
@@ -78,6 +89,7 @@ const SleepTracker = () => {
         setDuration(formatDuration(endTime - sleepStart));
         clearInterval(timerRef.current);
         localStorage.removeItem("sleepStart");
+        setButtonText("Track your sleep");
         navigate("/dashboard");
       } catch (error) {
         console.error(
@@ -113,30 +125,14 @@ const SleepTracker = () => {
     return () => clearInterval(timerRef.current);
   }, []);
 
-  // useEffect(() => {
-  //   const fetchActiveSleepSession = async () => {
-  //     if (!user?.token) return;
-
-  //     try {
-  //       const response = await axios.get(
-  //         "https://divi-sleep-api.vercel.app/api/sleep/active",
-  //         {
-  //           headers: { Authorization: `Bearer ${user.token}` },
-  //         }
-  //       );
-
-  //       if (response.data && response.data.start_time) {
-  //         const startTime = new Date(response.data.start_time);
-  //         setSleepStart(startTime);
-  //         startTimer(startTime);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching active sleep session:", error);
-  //     }
-  //   };
-
-  //   fetchActiveSleepSession();
-  // }, [user]);
+  const clearTimer = () => {
+    clearInterval(timerRef.current);
+    setSleepStart(null);
+    setSleepEnd(null);
+    setDuration(null);
+    localStorage.removeItem("sleepStart");
+    setButtonText("Track your sleep");
+  };
 
   return (
     <div className="sleep-tracker">
@@ -144,7 +140,6 @@ const SleepTracker = () => {
       <h2>Did we sleep?</h2>
       <h3>Start to track your good time</h3>
       <div className="sleep-tracker-buttons">
-        {" "}
         <button onClick={startSleep} disabled={sleepStart && !sleepEnd}>
           Start Peace
         </button>

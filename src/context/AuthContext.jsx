@@ -5,6 +5,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // Add loading state
+  const [buttonText, setButtonText] = useState("Track your sleep"); // Add buttonText state
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -41,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, loading, buttonText, setButtonText }}>
       {children}
     </AuthContext.Provider>
   );
