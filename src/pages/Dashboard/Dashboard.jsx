@@ -81,7 +81,7 @@ const Dashboard = () => {
         </p>
         <img src={assets.Dashboard.curlyArrow} alt="curly arrow" />
         <a href="/tracker">
-          <button>Track your sleep</button>
+          <button>{buttonText}</button>
         </a>
       </div>
       <h4>🌙 Your Sleep Time 😴</h4>
