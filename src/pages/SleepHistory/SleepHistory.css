@@ -16,6 +16,19 @@
     font-family: Lilita One;
     letter-spacing: 1.2px;
   }
+
+  .back-btn{
+    background-color: transparent;
+    border: 3px solid #f1efec;
+    padding: 15px 20px;
+    border-radius: 20px 5px 20px 5px;
+    color: #f1efec;
+    font-family: Lilita One;
+    font-size: 26px;
+    transition: 0.5s ease;
+    cursor: pointer;
+    float: left;
+  }
   
   table {
     width: 100%;
@@ -92,5 +105,10 @@
   
     th, td {
       padding: 8px;
+    }
+
+    .back-btn{
+      padding: 10px 15px;
+      font-size: 10px;
     }
   }

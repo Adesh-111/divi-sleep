@@ -40,7 +40,10 @@ const SleepHistory = () => {
 
   return (
     <div className="sleep-history-container">
+      <a href="/dashboard">
+      <button className="back-btn">Back</button></a>
       <h1>Sleep History</h1>
+      
       <table>
         <thead>
           <tr>
