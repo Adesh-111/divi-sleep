@@ -6,6 +6,17 @@
 
 The **DIVI Sleep Tracker** is a modern web application designed to help users monitor and optimize their sleep patterns, ultimately improving their overall well-being. With an intuitive interface and powerful backend, the application enables users to seamlessly start and end sleep sessions, review historical data, and analyze sleep trends over various time frames (daily, weekly, monthly).
 
+### Homepage
+![Screenshot 2025-04-03 234425](https://github.com/user-attachments/assets/ba540f4f-51f8-417b-a5f0-d814e451311d)
+### Login and signup page
+![Screenshot 2025-04-03 234449](https://github.com/user-attachments/assets/cdc66e5d-70bc-4aa0-a3d5-8d8470ddc14d)
+### Dashboard
+![Screenshot 2025-04-03 234642](https://github.com/user-attachments/assets/c5e9a407-ffa0-4e08-a0f0-88c7f0eda02e)
+### Sleep Tracker
+![Screenshot 2025-04-03 234654](https://github.com/user-attachments/assets/0b78c00a-a507-48cd-9cca-b3d079e79677)
+### Sleep history
+![Screenshot 2025-04-03 235713](https://github.com/user-attachments/assets/8c2a0034-8d1e-4f67-9da8-73b4924ca9c0)
+
 ---
 
 ## **Features**
