@@ -4,7 +4,6 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import "./SleepTracker.css";
 
-
 const SleepTracker = () => {
   const { user, setButtonText } = useContext(AuthContext);
   const [sleepStart, setSleepStart] = useState(null);
@@ -35,7 +34,7 @@ const SleepTracker = () => {
         setError("User token missing. Please log in again.");
         return;
       }
-  
+
       const response = await axios.post(
         "https://divi-sleep-api.vercel.app/api/sleep/start",
         {},
@@ -46,16 +45,16 @@ const SleepTracker = () => {
           },
         }
       );
-  
+
       const startTime = new Date(response.data.record.start_time);
       setSleepStart(startTime);
       setSleepEnd(null);
       setDuration(null);
       localStorage.setItem("sleepStart", startTime.toISOString());
       startTimer(startTime);
-  
+
       // Navigate to the /tracker route
-      navigate('/tracker');
+      navigate("/tracker");
     } catch (error) {
       console.error(
         "Error starting sleep session:",

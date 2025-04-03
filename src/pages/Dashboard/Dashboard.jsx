@@ -3,18 +3,14 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import "./Dashboard.css";
 import assets from "../../assets/assets";
-import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const { user, setUser} = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext); // Access logout function
   const [totalSleepToday, setTotalSleepToday] = useState("--");
   const [totalSleepWeekly, setTotalSleepWeekly] = useState("--");
   const [totalSleepMonthly, setTotalSleepMonthly] = useState("--");
-  const [buttonText, setButtonText] = useState("Track your sleep")
-  
-  const navigate = useNavigate();
+  const [buttonText, setButtonText] = useState("Track your sleep");
 
-  
   useEffect(() => {
     const startTime = localStorage.getItem("sleepStart");
     if (startTime) {
@@ -74,11 +70,6 @@ const Dashboard = () => {
     return `${hours}h ${minutes}m ${seconds}s`;
   };
 
-  const handleLogout = () => {
-    setUser(null);
-    navigate("/login");
-  };
-
   return (
     <div className="dashboard-container">
       <h1>DIVI Sleep?</h1>
@@ -90,7 +81,7 @@ const Dashboard = () => {
         </p>
         <img src={assets.Dashboard.curlyArrow} alt="curly arrow" />
         <a href="/tracker">
-          <button>{buttonText}</button>
+          <button>Track your sleep</button>
         </a>
       </div>
       <h4>🌙 Your Sleep Time 😴</h4>
@@ -112,7 +103,8 @@ const Dashboard = () => {
       <a href="/history" className="history-btn">
         <button>Show history</button>
       </a>
-      <button onClick={handleLogout} className="logout-btn">
+      {/* Logout Button */}
+      <button onClick={logout} className="logout-btn">
         Logout
       </button>
     </div>
