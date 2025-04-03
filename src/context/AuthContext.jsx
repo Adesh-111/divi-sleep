@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     const tokenExpiration = localStorage.getItem("tokenExpiration");
+
     if (storedToken && tokenExpiration) {
       const expirationDate = new Date(tokenExpiration);
       if (expirationDate > new Date()) {
@@ -21,13 +22,14 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = (token) => {
-    localStorage.setItem("token", token);
+  const login = (newToken) => {
+    localStorage.setItem("token", newToken);
     const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 14); 
+    expirationDate.setDate(expirationDate.getDate() + 14);
     localStorage.setItem("tokenExpiration", expirationDate.toISOString());
-    setUser(token);
-    setToken(token);
+
+    setUser({ token: newToken });
+    setToken(newToken);
   };
 
   const logout = () => {

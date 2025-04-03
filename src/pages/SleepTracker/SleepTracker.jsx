@@ -23,15 +23,22 @@ const SleepTracker = () => {
 
   const startSleep = async () => {
     try {
+      if (!user?.token) {
+        setError("User token missing. Please log in again.");
+        return;
+      }
+  
       const response = await axios.post(
-        "https://divi-sleep-api.vercel.app/api/sleep/start",
+        "http://localhost:5000/api/sleep/start",
         {},
         {
           headers: {
-            Authorization: user.token,
+            Authorization: `Bearer ${user.token}`,
+            "Content-Type": "application/json",
           },
         }
       );
+  
       const startTime = new Date(response.data.record.start_time);
       setSleepStart(startTime);
       setSleepEnd(null);
@@ -39,22 +46,30 @@ const SleepTracker = () => {
       localStorage.setItem("sleepStart", startTime.toISOString());
       startTimer(startTime);
     } catch (error) {
+      console.error("Error starting sleep session:", error.response?.data || error.message);
       setError("Error starting sleep session.");
     }
   };
-
+  
   const endSleep = async () => {
     if (sleepStart) {
       try {
+        if (!user?.token) {
+          setError("User token missing. Please log in again.");
+          return;
+        }
+  
         const response = await axios.post(
-          "https://divi-sleep-api.vercel.app/api/sleep/end",
+          "http://localhost:5000/api/sleep/end",
           {},
           {
             headers: {
-              Authorization: user.token,
+              Authorization: `Bearer ${user.token}`, 
+              "Content-Type": "application/json",
             },
           }
         );
+  
         const endTime = new Date(response.data.record.end_time);
         setSleepEnd(endTime);
         setDuration(formatDuration(endTime - sleepStart));
@@ -62,10 +77,16 @@ const SleepTracker = () => {
         localStorage.removeItem("sleepStart");
         navigate("/dashboard");
       } catch (error) {
-        setError("Error ending sleep session.");
+        console.error("Error ending sleep session:", error.response?.data || error.message);
+        if (error.response && error.response.status === 400) {
+          setError("No active sleep session found.");
+        } else {
+          setError("Error ending sleep session.");
+        }
       }
     }
   };
+  
 
   const startTimer = (startTime) => {
     timerRef.current = setInterval(() => {

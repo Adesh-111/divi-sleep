@@ -91,6 +91,23 @@ router.get("/sleep/today", authenticateUser, async (req, res) => {
   }
 });
 
+router.get("/sleep/weekly", authenticateUser, async (req, res) => {
+  const userId = req.user.userId;
+  try {
+    const result = await pool.query(
+      `SELECT COALESCE(SUM(EXTRACT(EPOCH FROM (end_time - start_time))), 0) AS total_sleep 
+       FROM sleep_records 
+       WHERE user_id = $1 
+       AND start_time >= CURRENT_DATE - INTERVAL '7 days'`,
+      [userId]
+    );
+    const totalSleepMilliseconds = result.rows.length ? result.rows[0].total_sleep * 1000 : 0;
+    res.json({ total_sleep: totalSleepMilliseconds });
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching sleep data" });
+  }
+});
+
 router.get("/sleep/monthly", authenticateUser, async (req, res) => {
   const userId = req.user.userId;
   try {
@@ -107,7 +124,6 @@ router.get("/sleep/monthly", authenticateUser, async (req, res) => {
     res.status(500).json({ error: "Error fetching sleep data" });
   }
 });
-
 router.get("/sleep/history", authenticateUser, async (req, res) => {
   const userId = req.user.userId;
   try {

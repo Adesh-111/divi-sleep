@@ -13,32 +13,29 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchSleepData = async (url, setData) => {
       try {
+        if (!user?.token) {
+          console.error("No token available");
+          return;
+        }
+
         const response = await axios.get(url, {
           headers: {
-            Authorization: user.token,
+            Authorization: `Bearer ${user.token}`,
             "Content-Type": "application/json",
           },
         });
+
         const duration = formatDuration(response.data.total_sleep);
         setData(duration);
       } catch (error) {
-        console.error(`Error fetching sleep data from ${url}:`, error);
+        console.error(`Error fetching sleep data from ${url}:`, error.response?.data || error.message);
       }
     };
 
-    if (user) {
-      fetchSleepData(
-        "https://divi-sleep-api.vercel.app/api/sleep/today",
-        setTotalSleepToday
-      );
-      fetchSleepData(
-        "https://divi-sleep-api.vercel.app/api/sleep/weekly",
-        setTotalSleepWeekly
-      );
-      fetchSleepData(
-        "https://divi-sleep-api.vercel.app/api/sleep/monthly",
-        setTotalSleepMonthly
-      );
+    if (user?.token) {
+      fetchSleepData("http://localhost:5000/api/sleep/today", setTotalSleepToday);
+      fetchSleepData("http://localhost:5000/api/sleep/weekly", setTotalSleepWeekly);
+      fetchSleepData("http://localhost:5000/api/sleep/monthly", setTotalSleepMonthly);
     }
   }, [user]);
 
@@ -58,12 +55,8 @@ const Dashboard = () => {
       <h1>DIVI Sleep?</h1>
       <h2>Did we sleep?</h2>
       <div className="track-now">
-        {" "}
-        <p>
-          Prioritize your rest and improve your well-being with better sleep
-          tracking!
-        </p>
-        <img src={assets.Dashboard.curlyArrow} alt="" />
+        <p>Prioritize your rest and improve your well-being with better sleep tracking!</p>
+        <img src={assets.Dashboard.curlyArrow} alt="curly arrow" />
         <a href="/tracker">
           <button>Track your sleep</button>
         </a>
@@ -77,7 +70,7 @@ const Dashboard = () => {
         </div>
         <div className="dashboard-card">
           <p>Week</p>
-          <h3>{totalSleepMonthly}</h3>
+          <h3>{totalSleepWeekly}</h3>
         </div>
         <div className="dashboard-card">
           <p>Month</p>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, use } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import "./SleepHistory.css";
@@ -9,16 +9,16 @@ const SleepHistory = () => {
 
   useEffect(() => {
     const fetchSleepHistory = async () => {
-      if (!user || !user.token) {
+      if (!user || !user) {
         console.error("User is not authenticated");
         return;
       }
 
       try {
         const response = await axios.get(
-          "https://divi-sleep-api.vercel.app/api/sleep/history",
+          "http://localhost:5000/api/sleep/history",
           {
-            headers: { Authorization: user.token },
+            headers: { Authorization: `Bearer ${user.token}` },
           }
         );
         setSleepRecords(response.data.records);
