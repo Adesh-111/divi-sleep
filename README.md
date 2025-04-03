@@ -1,82 +1,81 @@
-# DIVI Sleep Tracker
+# **DIVI Sleep Tracker**
 
-## Overview
+## **DID WE SLEEP?**
 
-DIVI Sleep Tracker is a web application designed to help users track their sleep patterns and improve their overall well-being. The application allows users to start and end sleep sessions, view sleep history, and monitor their sleep duration over different periods (daily, weekly, monthly).
+### **Overview**
 
-## Features
+The **DIVI Sleep Tracker** is a modern web application designed to help users monitor and optimize their sleep patterns, ultimately improving their overall well-being. With an intuitive interface and powerful backend, the application enables users to seamlessly start and end sleep sessions, review historical data, and analyze sleep trends over various time frames (daily, weekly, monthly).
 
-### Frontend
+---
 
-- **Start and End Sleep Sessions**: Users can start and end sleep sessions with a simple button click.
-- **Track Sleep Duration**: The application tracks and displays the duration of sleep sessions.
-- **View Sleep History**: Users can view their sleep history, including start and end times and total sleep duration.
-- **Dashboard**: The dashboard provides a summary of total sleep time for today, the week, and the month.
-- **Logout**: Users can log out of the application.
+## **Features**
 
-### Backend
+### **Frontend Capabilities**
+- **Start & End Sleep Sessions**: Users can initiate and conclude sleep sessions effortlessly.
+- **Real-time Sleep Tracking**: The application dynamically calculates and displays sleep duration.
+- **Comprehensive Sleep History**: Users can review previous sleep records, including start/end times and total hours slept.
+- **Intelligent Dashboard**: Provides insightful summaries of daily, weekly, and monthly sleep trends.
+- **User Authentication & Session Management**: Secure login and logout functionality to protect user data.
 
-- **Authentication**: Secure authentication using JWT tokens.
-- **Session Management**: Start and end sleep sessions with accurate time tracking.
-- **Data Storage**: Store and retrieve sleep session data using PostgreSQL.
-- **API Endpoints**: Provide RESTful API endpoints for frontend interaction.
-  - **POST /api/sleep/start**: Start a new sleep session.
-  - **POST /api/sleep/end**: End the current sleep session.
-  - **GET /api/sleep/history**: Retrieve the user's sleep history.
-  - **GET /api/sleep/today**: Get the total sleep for today.
-  - **GET /api/sleep/weekly**: Get the total sleep for the current week.
-  - **GET /api/sleep/monthly**: Get the total sleep for the current month.
+### **Backend Capabilities**
+- **JWT-Based Authentication**: Ensures secure user authentication via JSON Web Tokens.
+- **Sleep Session Management**: Accurately records and manages sleep session timestamps.
+- **Database Integration**: Utilizes PostgreSQL for persistent storage and efficient data retrieval.
+- **Robust API Endpoints**:
+  - `POST /api/sleep/start` - Initiates a sleep session.
+  - `POST /api/sleep/end` - Ends an ongoing sleep session.
+  - `GET /api/sleep/history` - Retrieves detailed sleep history.
+  - `GET /api/sleep/today` - Fetches total sleep for the current day.
+  - `GET /api/sleep/weekly` - Aggregates total sleep duration for the week.
+  - `GET /api/sleep/monthly` - Generates sleep insights for the month.
 
-## Technologies Used
+---
 
-### Frontend
+## **Technology Stack**
 
-- **React**: Frontend framework for building user interfaces.
-- **Context API**: For state management.
-- **Axios**: For making HTTP requests to the backend API.
-- **CSS**: For styling the application.
+### **Frontend Technologies**
+- **React.js** - Component-based framework for building interactive UIs.
+- **Context API** - Manages global state efficiently.
+- **Axios** - Handles API requests seamlessly.
+- **CSS** - Implements responsive and visually appealing styles.
 
-### Backend
+### **Backend Technologies**
+- **Node.js** - High-performance JavaScript runtime.
+- **Express.js** - Lightweight framework for building RESTful APIs.
+- **PostgreSQL** - Reliable and scalable relational database.
+- **JWT Authentication** - Secure user authentication system.
 
-- **Node.js**: JavaScript runtime for server-side programming.
-- **Express.js**: Web framework for building RESTful APIs.
-- **PostgreSQL**: Relational database for storing sleep session data.
-- **JWT**: JSON Web Tokens for secure authentication.
+---
 
-## Getting Started
+## **Installation & Setup**
 
-### Prerequisites
+### **Prerequisites**
+Ensure you have the following installed:
+- **Node.js & npm**
+- **PostgreSQL database**
 
-- Node.js and npm installed on your machine.
-- PostgreSQL database set up and running.
+### **Installation Steps**
 
-### Installation
-
-1. Clone the repository:
-
+1. **Clone the Repository**
    ```bash
    git clone https://github.com/Adesh-111/divi-sleep-tracker.git
    cd divi-sleep-tracker
    ```
 
-2. Install frontend dependencies:
-
+2. **Install Frontend Dependencies**
    ```bash
    cd client
    npm install
    ```
 
-3. Install backend dependencies:
-
+3. **Install Backend Dependencies**
    ```bash
    cd ../server
    npm install
    ```
 
-4. Set up environment variables in the `server` directory:
-
-   Create a `.env` file and add the following:
-
+4. **Configure Environment Variables**
+   In the `server` directory, create a `.env` file and add:
    ```plaintext
    DB_HOST=your_database_host
    DB_PORT=your_database_port
@@ -86,47 +85,59 @@ DIVI Sleep Tracker is a web application designed to help users track their sleep
    JWT_SECRET=your_jwt_secret
    ```
 
-5. Start the backend server:
-
+5. **Start the Backend Server**
    ```bash
    npm start
    ```
 
-6. Start the frontend development server:
-
+6. **Start the Frontend Development Server**
    ```bash
    cd ../client
    npm start
    ```
 
-7. Open your browser and navigate to `http://localhost:3000`.
+7. **Access the Application**
+   Open your browser and navigate to `http://localhost:3000`
 
-## Project Structure
+---
 
-The project is structured as follows:
+## **Project Structure**
 
-- **client**: Contains the frontend code.
-  - **src**: Source code for the React application.
-    - **assets**: Contains assets like images and styles.
-    - **components**: Contains reusable components.
-    - **context**: Contains the AuthContext for state management.
-    - **pages**: Contains the main pages of the application.
-    - **App.js**: The main entry point for the React application.
-- **server**: Contains the backend code.
-  - **models**: Database models for PostgreSQL.
-  - **routes**: API route handlers.
-  - **controllers**: Business logic for handling requests.
-  - **middleware**: Authentication and error handling middleware.
-  - **server.js**: Main entry point for the Express server.
+```plaintext
+/divi-sleep-tracker
+│── client/                # Frontend code
+│   ├── src/
+│   │   ├── assets/        # Images & styles
+│   │   ├── components/    # Reusable UI components
+│   │   ├── context/       # State management (Context API)
+│   │   ├── pages/         # Application pages
+│   │   ├── App.js         # Main application entry point
+│
+│── server/                # Backend code
+│   ├── models/            # Database schema
+│   ├── routes/            # API route handlers
+│   ├── controllers/       # Business logic
+│   ├── middleware/        # Authentication & error handling
+│   ├── server.js          # Express server entry point
+│
+│── README.md              # Documentation
+│── LICENSE                # MIT License
+```
 
-## License
+---
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+## **License**
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for further details.
 
-## Contributing
+---
 
-Contributions are welcome! Please open an issue or submit a pull request if you would like to contribute to this project.
+## **Contributing**
+Contributions are highly encouraged! Feel free to open an issue or submit a pull request if you'd like to enhance the project.
 
-## Contact
+---
 
-For any questions or inquiries, please contact Adesh-111.
+## **Contact**
+For inquiries or feedback, please contact **Adesh-111**.
+
+---
+
