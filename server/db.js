@@ -11,10 +11,11 @@ const pool = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
+  ssl: { rejectUnauthorized: false }, // ✅ Required for Supabase
 });
 
 pool.connect()
-  .then(() => console.log("PostgreSQL Connected"))
-  .catch(err => console.error("PostgreSQL Connection Error:", err));
+  .then(() => console.log("✅ PostgreSQL Connected Successfully!"))
+  .catch(err => console.error("❌ PostgreSQL Connection Error:", err));
 
 export default pool;

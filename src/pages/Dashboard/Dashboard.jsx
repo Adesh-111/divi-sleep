@@ -28,14 +28,26 @@ const Dashboard = () => {
         const duration = formatDuration(response.data.total_sleep);
         setData(duration);
       } catch (error) {
-        console.error(`Error fetching sleep data from ${url}:`, error.response?.data || error.message);
+        console.error(
+          `Error fetching sleep data from ${url}:`,
+          error.response?.data || error.message
+        );
       }
     };
 
     if (user?.token) {
-      fetchSleepData("http://localhost:5000/api/sleep/today", setTotalSleepToday);
-      fetchSleepData("http://localhost:5000/api/sleep/weekly", setTotalSleepWeekly);
-      fetchSleepData("http://localhost:5000/api/sleep/monthly", setTotalSleepMonthly);
+      fetchSleepData(
+        "https://divi-sleep-api.vercel.app/api/sleep/today",
+        setTotalSleepToday
+      );
+      fetchSleepData(
+        "https://divi-sleep-api.vercel.app/api/sleep/weekly",
+        setTotalSleepWeekly
+      );
+      fetchSleepData(
+        "https://divi-sleep-api.vercel.app/api/sleep/monthly",
+        setTotalSleepMonthly
+      );
     }
   }, [user]);
 
@@ -55,7 +67,10 @@ const Dashboard = () => {
       <h1>DIVI Sleep?</h1>
       <h2>Did we sleep?</h2>
       <div className="track-now">
-        <p>Prioritize your rest and improve your well-being with better sleep tracking!</p>
+        <p>
+          Prioritize your rest and improve your well-being with better sleep
+          tracking!
+        </p>
         <img src={assets.Dashboard.curlyArrow} alt="curly arrow" />
         <a href="/tracker">
           <button>Track your sleep</button>
@@ -78,8 +93,8 @@ const Dashboard = () => {
         </div>
       </div>
       <a href="/history" className="history-btn">
-          <button>Show history</button>
-        </a>
+        <button>Show history</button>
+      </a>
     </div>
   );
 };

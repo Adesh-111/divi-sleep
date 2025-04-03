@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://divi-sleep-api.vercel.app/api";
 
 export const register = async (username, password) => {
   try {

@@ -16,7 +16,7 @@ const SleepHistory = () => {
 
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/sleep/history",
+          "https://divi-sleep-api.vercel.app/api/sleep/history",
           {
             headers: { Authorization: `Bearer ${user.token}` },
           }
@@ -61,9 +61,7 @@ const SleepHistory = () => {
                   : "Ongoing"}
               </td>
               <td>
-                {record.duration
-                  ? formatDuration(record.duration)
-                  : "Ongoing"}
+                {record.duration ? formatDuration(record.duration) : "Ongoing"}
               </td>
             </tr>
           ))}
