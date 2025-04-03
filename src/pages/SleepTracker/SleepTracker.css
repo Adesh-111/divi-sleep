@@ -9,6 +9,7 @@
   font-size: 100px;
   font-family: Lilita One;
   color: #f1efec;
+  margin: 10px;
 }
 
 .sleep-tracker h2 {
@@ -68,4 +69,29 @@
     font-size:150px;
     font-family: Lilita One;
     color: #f1efec;
+}
+
+@media screen and (max-width: 600px) {
+    .sleep-tracker h1{
+        font-size: 60px;
+        
+    }
+
+    .sleep-tracker h2{
+        font-size: 25px;
+    }
+
+    .sleep-tracker h3{
+        font-size: 32px;
+    }
+
+    .sleep-tracker-buttons{
+        flex-direction: column;
+        gap: 20px;
+        transform: scale(0.8);
+    }
+
+    .sleep-tracker .duration{
+        font-size: 70px;
+    }
 }

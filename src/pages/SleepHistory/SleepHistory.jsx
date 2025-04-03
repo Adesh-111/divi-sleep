@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, use } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import "./SleepHistory.css";
@@ -9,7 +9,7 @@ const SleepHistory = () => {
 
   useEffect(() => {
     const fetchSleepHistory = async () => {
-      if (!user || !user) {
+      if (!user || !user.token) {
         console.error("User is not authenticated");
         return;
       }
@@ -30,6 +30,14 @@ const SleepHistory = () => {
     fetchSleepHistory();
   }, [user]);
 
+  const formatDuration = (fractionalHours) => {
+    const totalSeconds = fractionalHours * 3600;
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = (totalSeconds % 60).toFixed(0); // rounding to the nearest second
+    return `${hours}hr ${minutes}min ${seconds}sec`;
+  };
+
   return (
     <div className="sleep-history-container">
       <h1>Sleep History</h1>
@@ -39,7 +47,7 @@ const SleepHistory = () => {
             <th>Date</th>
             <th>Start Time</th>
             <th>End Time</th>
-            <th>Duration (hours)</th>
+            <th>Duration</th>
           </tr>
         </thead>
         <tbody>
@@ -54,7 +62,7 @@ const SleepHistory = () => {
               </td>
               <td>
                 {record.duration
-                  ? (record.duration / 3600).toFixed(2)
+                  ? formatDuration(record.duration)
                   : "Ongoing"}
               </td>
             </tr>
