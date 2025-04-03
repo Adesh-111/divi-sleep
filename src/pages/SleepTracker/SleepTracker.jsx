@@ -113,30 +113,30 @@ const SleepTracker = () => {
     return () => clearInterval(timerRef.current);
   }, []);
 
-  useEffect(() => {
-    const fetchActiveSleepSession = async () => {
-      if (!user?.token) return;
+  // useEffect(() => {
+  //   const fetchActiveSleepSession = async () => {
+  //     if (!user?.token) return;
 
-      try {
-        const response = await axios.get(
-          "https://divi-sleep-api.vercel.app/api/sleep/active",
-          {
-            headers: { Authorization: `Bearer ${user.token}` },
-          }
-        );
+  //     try {
+  //       const response = await axios.get(
+  //         "https://divi-sleep-api.vercel.app/api/sleep/active",
+  //         {
+  //           headers: { Authorization: `Bearer ${user.token}` },
+  //         }
+  //       );
 
-        if (response.data && response.data.start_time) {
-          const startTime = new Date(response.data.start_time);
-          setSleepStart(startTime);
-          startTimer(startTime);
-        }
-      } catch (error) {
-        console.error("Error fetching active sleep session:", error);
-      }
-    };
+  //       if (response.data && response.data.start_time) {
+  //         const startTime = new Date(response.data.start_time);
+  //         setSleepStart(startTime);
+  //         startTimer(startTime);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching active sleep session:", error);
+  //     }
+  //   };
 
-    fetchActiveSleepSession();
-  }, [user]);
+  //   fetchActiveSleepSession();
+  // }, [user]);
 
   return (
     <div className="sleep-tracker">

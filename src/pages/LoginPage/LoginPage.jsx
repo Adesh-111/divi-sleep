@@ -85,8 +85,6 @@ const LoginPage = () => {
     try {
       await register(signupData.username, signupData.password);
       alert("Signup Successful");
-      
-      // Automatically log in the user after successful signup
       const response = await login(signupData.username, signupData.password);
       authLogin(response.token);
       navigate("/dashboard");

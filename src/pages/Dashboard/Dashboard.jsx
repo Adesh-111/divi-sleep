@@ -5,7 +5,7 @@ import "./Dashboard.css";
 import assets from "../../assets/assets";
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext); // Access logout function
   const [totalSleepToday, setTotalSleepToday] = useState("--");
   const [totalSleepWeekly, setTotalSleepWeekly] = useState("--");
   const [totalSleepMonthly, setTotalSleepMonthly] = useState("--");
@@ -95,6 +95,10 @@ const Dashboard = () => {
       <a href="/history" className="history-btn">
         <button>Show history</button>
       </a>
+      {/* Logout Button */}
+      <button onClick={logout} className="logout-btn">
+        Logout
+      </button>
     </div>
   );
 };
