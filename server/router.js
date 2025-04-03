@@ -55,7 +55,6 @@ router.post("/sleep/start", authenticateUser, async (req, res) => {
     res.status(500).json({ error: "Error starting sleep" });
   }
 });
-
 router.post("/sleep/end", authenticateUser, async (req, res) => {
   const userId = req.user.userId;
   try {
@@ -124,11 +123,12 @@ router.get("/sleep/monthly", authenticateUser, async (req, res) => {
     res.status(500).json({ error: "Error fetching sleep data" });
   }
 });
+
 router.get("/sleep/history", authenticateUser, async (req, res) => {
   const userId = req.user.userId;
   try {
     const result = await pool.query(
-      `SELECT id, start_time, end_time, EXTRACT(EPOCH FROM (end_time - start_time)) AS duration
+      `SELECT id, start_time, end_time, EXTRACT(EPOCH FROM (end_time - start_time)) / 3600 AS duration
        FROM sleep_records 
        WHERE user_id = $1 
        ORDER BY start_time DESC`,

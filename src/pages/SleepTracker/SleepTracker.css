@@ -1,1 +1,71 @@
-.
+.sleep-tracker {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sleep-tracker h1 {
+  font-size: 100px;
+  font-family: Lilita One;
+  color: #f1efec;
+}
+
+.sleep-tracker h2 {
+  font-size: 30px;
+  color: #f1efec;
+  background-color: #123458;
+  width: 100%;
+  padding: 10px;
+}
+
+.sleep-tracker h3 {
+  font-size: 50px;
+  color: #f1efec;
+  padding: 10px;
+  margin-top: 20px;
+  font-family: caveat;
+}
+
+.sleep-tracker-buttons {
+  display: flex;
+  gap: 100px;
+  margin: 20px auto;
+}
+
+.sleep-tracker-buttons button {
+  font-family: Lilita One;
+  color: #f1efec;
+  padding: 15px 20px;
+  font-size: 50px;
+  border-radius: 30px 10px 30px 10px;
+  background-color: transparent;
+  border: 3px solid #f1efec;
+  transition: 1s ease;
+  cursor: pointer;
+}
+
+.sleep-tracker-buttons button:visited {
+  background-color: transparent;
+}
+
+.sleep-tracker-buttons button:enabled {
+  background-color: #f1efec; 
+  color: #123458;
+}
+
+.sleep-tracker-buttons button:active {
+  background-color: #f1efec; 
+}
+
+.sleep-tracker-buttons button:hover {
+  background-color: #f1efec;
+  color: #123458;
+  transform: scale(1.1);
+}
+
+.sleep-tracker .duration{
+    font-size:150px;
+    font-family: Lilita One;
+    color: #f1efec;
+}

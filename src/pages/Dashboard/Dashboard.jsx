@@ -77,6 +77,9 @@ const Dashboard = () => {
           <h3>{totalSleepMonthly}</h3>
         </div>
       </div>
+      <a href="/history" className="history-btn">
+          <button>Show history</button>
+        </a>
     </div>
   );
 };

@@ -27,7 +27,7 @@ const SleepTracker = () => {
         setError("User token missing. Please log in again.");
         return;
       }
-  
+
       const response = await axios.post(
         "http://localhost:5000/api/sleep/start",
         {},
@@ -38,7 +38,7 @@ const SleepTracker = () => {
           },
         }
       );
-  
+
       const startTime = new Date(response.data.record.start_time);
       setSleepStart(startTime);
       setSleepEnd(null);
@@ -46,11 +46,14 @@ const SleepTracker = () => {
       localStorage.setItem("sleepStart", startTime.toISOString());
       startTimer(startTime);
     } catch (error) {
-      console.error("Error starting sleep session:", error.response?.data || error.message);
+      console.error(
+        "Error starting sleep session:",
+        error.response?.data || error.message
+      );
       setError("Error starting sleep session.");
     }
   };
-  
+
   const endSleep = async () => {
     if (sleepStart) {
       try {
@@ -58,18 +61,18 @@ const SleepTracker = () => {
           setError("User token missing. Please log in again.");
           return;
         }
-  
+
         const response = await axios.post(
           "http://localhost:5000/api/sleep/end",
           {},
           {
             headers: {
-              Authorization: `Bearer ${user.token}`, 
+              Authorization: `Bearer ${user.token}`,
               "Content-Type": "application/json",
             },
           }
         );
-  
+
         const endTime = new Date(response.data.record.end_time);
         setSleepEnd(endTime);
         setDuration(formatDuration(endTime - sleepStart));
@@ -77,7 +80,10 @@ const SleepTracker = () => {
         localStorage.removeItem("sleepStart");
         navigate("/dashboard");
       } catch (error) {
-        console.error("Error ending sleep session:", error.response?.data || error.message);
+        console.error(
+          "Error ending sleep session:",
+          error.response?.data || error.message
+        );
         if (error.response && error.response.status === 400) {
           setError("No active sleep session found.");
         } else {
@@ -86,7 +92,6 @@ const SleepTracker = () => {
       }
     }
   };
-  
 
   const startTimer = (startTime) => {
     timerRef.current = setInterval(() => {
@@ -112,15 +117,18 @@ const SleepTracker = () => {
     <div className="sleep-tracker">
       <h1>DIVI Sleep?</h1>
       <h2>Did we sleep?</h2>
-      <h3>Sleep Tracker</h3>
-      <button onClick={startSleep} disabled={sleepStart && !sleepEnd}>
-        Start Sleep
-      </button>
-      <button onClick={endSleep} disabled={!sleepStart || sleepEnd}>
-        End Sleep
-      </button>
+      <h3>Start to track your good time</h3>
+      <div className="sleep-tracker-buttons">
+        {" "}
+        <button onClick={startSleep} disabled={sleepStart && !sleepEnd}>
+          Start Peace
+        </button>
+        <button onClick={endSleep} disabled={!sleepStart || sleepEnd}>
+          End Peace
+        </button>
+      </div>
       {error && <p className="error-text">{error}</p>}
-      {duration && <p>Total Sleep: {duration}</p>}
+      {duration && <p className="duration">{duration}</p>}
     </div>
   );
 };
